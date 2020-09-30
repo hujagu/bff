@@ -1,0 +1,16 @@
+{
+  "name": "planes_bff",
+  "version": "1.0.0",
+  "description": "Busqueda de Planes",
+  "author": "Javier Garrido <javier.garrido@gmail.com>",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "docker:build": "docker build -f Dockerfile -t bff .",
+    "docker:run": "docker run -it --rm --name bff -p 8080:8080 bff",
+    "docker:stop": "docker stop bff"
+  },
+  "dependencies": {
+    "express": "^4.16.1"
+  }
+}
