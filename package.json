@@ -1,16 +1,95 @@
 {
-  "name": "planes_bff",
+  "name": "bff",
   "version": "1.0.0",
-  "description": "Busqueda de Planes",
-  "author": "Javier Garrido <javier.garrido@gmail.com>",
-  "main": "src/server.js",
-  "scripts": {
-    "start": "node src/server.js",
-    "docker:build": "docker build -f Dockerfile -t bff .",
-    "docker:run": "docker run -it --rm --name bff -p 8080:8080 bff",
-    "docker:stop": "docker stop bff"
+  "description": "Test BFF",
+  "private": true,
+  "main": "index.js",
+  "engines": {
+    "npm": ">=5.7.0",
+    "node": ">=8.10.0 <9.0.0"
   },
   "dependencies": {
-    "express": "^4.16.1"
+    "cors": "^2.8.4",
+    "dotenv": "^2.0.0",
+    "express": "^4.16.3",
+    "file-stream-rotator": "0.0.7",
+    "http-status": "^0.2.3",
+    "moment": "^2.17.1",
+    "morgan": "^1.8.2",
+    "node": "^14.13.0",
+    "node-uuid": "^1.4.7",
+    "winston": "^2.3.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "console-jpeg": "0.0.3",
+    "console-png": "^1.2.1",
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb-base": "^11.0.0",
+    "eslint-plugin-import": "^2.10.0",
+    "eslint-watch": "^2.1.14",
+    "http-server": "^0.9.0",
+    "husky": "^0.14.3",
+    "jest": "^22.4.3",
+    "retire": "^1.6.0",
+    "stryker": "^0.21.0",
+    "stryker-api": "^0.15.0",
+    "stryker-babel-transpiler": "^0.4.0",
+    "stryker-cli": "^0.1.3",
+    "stryker-html-reporter": "^0.13.0",
+    "stryker-javascript-mutator": "^0.5.0",
+    "stryker-jest-runner": "^0.6.0",
+    "supertest": "^3.0.0",
+    "test-console": "^1.0.0"
+  },
+  "scripts": {
+    "prestart": "babel src -d build",
+    "start": "NODE_PATH=./build node ./build/server.js",
+    "test": "npm run test:unit",
+    "test:unit": "NODE_PATH=./src:./test jest ./test/unit ./test/integration",
+    "test:watch": "npm test -- --watch",
+    "test:mutation": "NODE_PATH=./src stryker run",
+    "test:mutation-serve": "npm run test:mutation && node_modules/.bin/http-server -s -p 9000 reports/mutation/html/",
+    "lint": "esw --color",
+    "security": "retire --severity critical",
+    "lint:watch": "npm run lint -- --watch",
+    "preversion": "npm run lint && npm test",
+    "husky:bad": "node ./huskyscripts/badRun.js",
+    "husky:good": "node ./huskyscripts/goodRun.js",
+    "precommit": "npm run lint && npm test && npm run test:mutation && npm run husky:good || npm run husky:bad",
+    "prepush": "npm run security"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!**/node_modules/**",
+      "!src/server.js",
+      "!src/core/config.js",
+      "!src/core/logger.js",
+      "!src/core/restify.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 90,
+        "lines": 90,
+        "statements": 90
+      }
+    },
+    "testEnvironment": "node"
+  },
+  "author": "Javier GArrido",
+  "license": "ISC",
+  "directories": {
+    "test": "test",
+    "lib": "src"
   }
 }

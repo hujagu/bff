@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -e
+set -o pipefail
+service_name=bff
+service_id=${service_name}-v1
+docker_tag=1-git${SVN_REVISION}-master
+image_name=${service_name}:${docker_tag}"
+
+{
+	echo "SERVICE_ID=${service_id}"
+	echo "DOCKER_IMAGE=${image_name}"
+	echo "DOCKER_TAG=${docker_tag}"
+} >> env.properties
+docker build -t $image_name -f docker/Dockerfile .
+docker push $image_name

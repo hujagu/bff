@@ -1,16 +1,10 @@
-'use strict';
+import app from 'app';
+import Config from 'core/config';
+import Logger from 'core/logger';
 
-const express = require('express');
+const config = new Config();
+const logger = new Logger();
 
-// Constants
-const PORT = 8080;
-const HOST = '0.0.0.0';
-
-// App
-const app = express();
-app.get('/', (req, res) => {
-  res.send('Hello World');
+app.listen(config.app.port, () => {
+    logger.info(`action=startListen, description="Start listen NodeJS Application", appName="${config.app.name}", appPort=${config.app.port}`);
 });
-
-app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
