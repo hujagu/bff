@@ -48,3 +48,6 @@ tmp
 # Environment configuration
 .env
 reports
+
+# Visual Studio Code
+.vscode

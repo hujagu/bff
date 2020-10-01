@@ -25,7 +25,7 @@ class Config {
 
             // Define app configuration parameters
             this.app = {
-                name: 'Bff',
+                name: 'Web Apps Configuration Service',
                 prefixURL: '/ws/bff/v1',
                 port: process.env.NODE_PORT || '8080',
                 logLevel: process.env.LOG_LEVEL || 'debug'

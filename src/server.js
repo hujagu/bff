@@ -1,3 +1,5 @@
+import 'babel-core/register';
+import 'babel-polyfill';
 import app from 'app';
 import Config from 'core/config';
 import Logger from 'core/logger';

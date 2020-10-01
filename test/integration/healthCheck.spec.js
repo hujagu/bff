@@ -10,12 +10,4 @@ describe('Routes: Health', () => {
             .get(`${config.app.prefixURL}/health`)
             .expect(OK, done);
     });
-
-    test('OPTIONS: /health', (done) => {
-        request(app)
-            .options(`${config.app.prefixURL}/health`)
-            .expect('Access-Control-Allow-Origin', '*')
-            .expect('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE')
-            .expect('Access-Control-Allow-Headers', 'X-Flow-Id,X-Track-Id', done);
-    });
 });

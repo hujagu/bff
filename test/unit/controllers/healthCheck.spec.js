@@ -1,4 +1,4 @@
-import httpStatus from 'http-status';
+import { OK } from 'http-status';
 import HealthCheck from 'controllers/healthCheck';
 
 describe('Test controller/healthCheck', () => {
@@ -11,7 +11,7 @@ describe('Test controller/healthCheck', () => {
 
         HealthCheck(null, response, nextFn);
 
-        expect(response.status).toHaveBeenCalledWith(httpStatus.OK);
+        expect(response.status).toHaveBeenCalledWith(OK);
         expect(nextFn).toHaveBeenCalled();
     });
 });
