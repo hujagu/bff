@@ -11,8 +11,8 @@ describe('Routes: Plans', () => {
     });
 
     test('GET: /planes', () => {
-        return request(app)
-            .get(`${config.app.prefixURL}/planes`)
-            .expect(OK);
+        request(app)
+        .get(`${config.app.prefixURL}/planes`)
+        .expect(OK);
     });
 });
