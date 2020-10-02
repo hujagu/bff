@@ -5,7 +5,7 @@ import Logger from 'core/logger';
 const getPlans = async (req, res, next) => {
     const logger = new Logger(req.headers.tracking);
     logger.info('action=getPlans description="begin process"');
-    const resBody = await Plans.findPlans(req.headers.tracking);
+    const resBody = await Plans.findPlans(req);
     logger.info(`action=getPlans resBody=${JSON.stringify(resBody)}`);
     res.status(httpStatus.OK);
     res.send(resBody);
